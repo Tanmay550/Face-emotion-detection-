@@ -1,0 +1,23 @@
+tfl.Conv2D(40,7,1) 15 epochs initial: .4141  final: .8542
+tfl.Conv2D(40,9,1) 15 epochs initial: .4034  final: .8359
+tfl.Conv2D(40,5,1) 15 epochs initial: .4189  final: .8621
+# Increasing the stride does not do anything better
+
+tfl.Conv2D(32,1,1) 15 epochs inital: .4423  final: .8440
+epochs 20 normal model .initial: 4220 final: .9001
+epochs 25 normal model .initial: 4169 final: .9263
+epochs 30 normal model .initial: 4182 final: .9379
+
+
+emotion_model = tf.keras.Sequential([
+        tfl.ZeroPadding2D(padding = 3,input_shape=(48, 48, 3), data_format="channels_last"),
+        tfl.Conv2D(40,5,1),
+        tfl.BatchNormalization(axis = 3),
+        tfl.ReLU(),
+        tfl.MaxPool2D(),
+        tfl.Flatten(),
+        tfl.Dense(7, activation = "softmax")
+    ])
+
+Train_accuracy = .9234 , Test_accuracy =  0.7646026611328125
+
